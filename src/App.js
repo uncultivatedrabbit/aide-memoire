@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import "./App.css";
+import store from "./store";
+import Main from "./components/Main";
+import Sidebar from "./components/Sidebar";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    folders: store.folders,
+    notes: store.notes,
+  };
+  render() {
+    return (
+      <>
+        <header id="header">
+          <Link to="/">
+            <h1 id="title">Noteful</h1>
+          </Link>
+        </header>
+        <div id="container">
+          <section id="sidebar-container">
+            <Sidebar folders={this.state.folders} notes={this.state.notes} />
+          </section>
+          <main id="main-container">
+            <Main folders={this.state.folders} notes={this.state.notes} />
+          </main>
+        </div>
+      </>
+    );
+  }
 }
 
 export default App;

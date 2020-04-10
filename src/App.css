@@ -1,38 +1,179 @@
-.App {
+@import url("https://fonts.googleapis.com/css?family=Karla|Rubik&display=swap");
+
+/* ------------------
+   Global Styling 
+-------------------*/
+
+:root {
+  --main-dark: #0f0f0f;
+  --main-light: #dcdde1;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Karla", sans-serif;
+  background-color: var(--main-dark);
+  color: var(--main-light);
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Rubik", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: var(--main-light);
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+/* ------------------
+   Main Page Styling 
+-------------------*/
+
+#header {
+  background-color: var(--main-dark);
+  margin: 0;
+  padding: 1em;
+  border-bottom: 2px solid var(--main-light);
+}
+
+#title {
   text-align: center;
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#container {
+  display: flex;
+  height: 90vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#main-container,
+#sidebar-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+#sidebar-container {
+  width: 50vw;
+  border-right: 2px solid var(--main-light);
+  align-items: flex-end;
+  padding-right: 1em;
+  background-color: var(--main-light);
+  color: var(--main-dark);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+#sidebar-container a {
+  color: var(--main-dark);
+}
+
+#main-container {
+  width: 50vw;
+  align-items: flex-start;
+  padding-left: 1em;
+  flex-wrap: wrap;
+}
+
+/* ------------------
+  Folder Styling 
+-------------------*/
+.folder-card {
+  background: var(--main-dark);
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 0.6em;
+  border: 2px solid var(--main-dark);
+  border-radius: 5px;
+  transition: 0.4s all ease-in-out;
+}
+
+.folder-card a {
+  display: block;
+  width: 150px;
+  height: 100px;
+  color: var(--main-light) !important;
+  line-height: calc(200px / 2);
+}
+
+.folder-card:hover {
+  background: var(--main-light);
+}
+.folder-card:hover a {
+  color: var(--main-dark) !important;
+}
+.folder-card .active {
+  background: var(--main-light);
+  color: var(--main-dark) !important;
+}
+/* ------------------
+  Note Styling 
+-------------------*/
+.notes-list {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+}
+
+.note-card {
+  font-size: 18px;
+  text-align: center;
+  margin: 0 0.6em 0.6em 0.6em;
+  border: 2px solid var(--main-light);
+  border-radius: 5px;
+  background-color: var(--main-dark);
+  transition: 0.4s all ease-in-out;
+}
+
+.note-card a {
+  display: block;
+  width: 100px;
+  height: 100px;
+  color: var(--main-light) !important;
+  line-height: calc(200px / 2);
+}
+.note-card:hover {
+  background-color: var(--main-light);
+}
+.note-card:hover a {
+  color: var(--main-dark) !important;
+}
+
+/* ------------------
+  Mobile Styling 
+-------------------*/
+@media screen and (max-width: 700px) {
+  #container {
+    flex-direction: column;
   }
-  to {
-    transform: rotate(360deg);
+  #main-container,
+  #sidebar-container {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .notes-list {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
   }
 }
