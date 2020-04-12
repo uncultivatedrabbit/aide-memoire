@@ -6,15 +6,14 @@ export default class NoteSidebar extends Component {
     const note = notes.find(note => note.id === match.params.noteId)
     const folderContainingNote = folders.find(folder => folder.id === note.folderId).name
     return (
-      <>
-      {folderContainingNote}
-      </>
+      <React.Fragment>
+      <h3>{folderContainingNote}</h3>
+      </React.Fragment>
     )
   }
   render() {
     return (
-      <div>
-        <h4>NOTE SIDEBAR</h4>
+      <div className="folder-name-vert">
         {this.renderNoteSidebar()}
       </div>
     )

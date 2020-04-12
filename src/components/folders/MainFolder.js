@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class MainFolder extends Component {
   renderFolderContents = () => {
@@ -10,17 +11,21 @@ export default class MainFolder extends Component {
       (note) => note.folderId === folder.id
     );
     return notesInsideFolder.map((note) => (
-    <li key={note.id}>
-      {note.name} <br/>
-      {note.modified}
-    </li>
+      <li className="note-card" key={note.id}>
+        <Link to={`/note/${note.id}`}>
+          {note.name} <br />
+          {new Date(note.modified).getMonth() + 1}/
+          {new Date(note.modified).getDate()}/
+          {new Date(note.modified).getFullYear()}
+        </Link>
+      </li>
     ));
   };
   render() {
     return (
       <div>
         <h3>NOTES:</h3>
-        <ul>{this.renderFolderContents()}</ul>
+        <ul className="notes-list">{this.renderFolderContents()}</ul>
       </div>
     );
   }

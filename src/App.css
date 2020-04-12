@@ -7,6 +7,7 @@
 :root {
   --main-dark: #0f0f0f;
   --main-light: #dcdde1;
+  --main-blue: #0097e6;
 }
 
 body {
@@ -94,6 +95,29 @@ button:hover {
 }
 
 /* ------------------
+  Button Styling 
+-------------------*/
+
+.btn{
+  background-color: var(--main-blue);
+  padding: 1em;
+  border-radius: 55px;
+  border: none;
+  color: var(--main-light);
+  height: 75px;
+  width: 75px;
+  font-size: 0.85rem;
+}
+
+.btn:hover{
+  box-shadow: inset 0 0 10px #000000;
+  background-color: #037abb;
+  font-size: 0.8rem;
+}
+
+
+
+/* ------------------
   Folder Styling 
 -------------------*/
 .folder-card {
@@ -108,10 +132,10 @@ button:hover {
 
 .folder-card a {
   display: block;
-  width: 150px;
-  height: 100px;
+  width: 120px;
+  height: 80px;
   color: var(--main-light) !important;
-  line-height: calc(200px / 2);
+  line-height: calc(160px / 2);
 }
 
 .folder-card:hover {
@@ -124,17 +148,30 @@ button:hover {
   background: var(--main-light);
   color: var(--main-dark) !important;
 }
+
+.folder-name-vert *{
+  text-orientation: upright;
+  writing-mode: vertical-lr;
+  text-transform: uppercase;
+  float: right;
+}
+
 /* ------------------
   Note Styling 
 -------------------*/
+
+.note-content{
+  width: 60%;
+}
+
 .notes-list {
   display: flex;
   flex-wrap: wrap;
-  width: 80%;
+  width: 100%;
 }
 
 .note-card {
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
   margin: 0 0.6em 0.6em 0.6em;
   border: 2px solid var(--main-light);
@@ -145,10 +182,10 @@ button:hover {
 
 .note-card a {
   display: block;
-  width: 100px;
+  width: 90px;
   height: 100px;
   color: var(--main-light) !important;
-  line-height: calc(200px / 2);
+  line-height: calc(90px / 2);
 }
 .note-card:hover {
   background-color: var(--main-light);

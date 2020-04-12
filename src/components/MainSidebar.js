@@ -13,7 +13,7 @@ export default class MainSidebar extends Component {
     return (
       <div>
         <ul>{this.renderFolders()}</ul>
-        <button>Add Folder</button>
+        <button className="btn">Add Folder</button>
       </div>
     );
   }

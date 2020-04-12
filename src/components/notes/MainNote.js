@@ -6,18 +6,16 @@ export default class MainNote extends Component {
     const note = notes.find((note) => note.id === match.params.noteId);
     return (
       <>
-        {note.name} <br />
-        {note.modified} <br />
-        {note.content}
+        <h2>{note.name}</h2>
+        {new Date(note.modified).getMonth() + 1}/
+        {new Date(note.modified).getDate()}/
+        {new Date(note.modified).getFullYear()}
+        <br />
+        <p className="note-detail">{note.content}</p>
       </>
     );
   };
   render() {
-    return (
-      <div>
-        <h4>MainNote</h4>
-        {this.renderNote()}
-      </div>
-    );
+    return <div className="note-content">{this.renderNote()}</div>;
   }
 }
