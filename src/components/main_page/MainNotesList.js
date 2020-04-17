@@ -2,18 +2,12 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { NotesContext } from "../../NotesContext";
 
-export default class MainFolder extends Component {
-  renderFolderContents = () => {
+export default class MainNotesList extends Component {
+  renderNotesList = () => {
     return (
       <NotesContext.Consumer>
-        {(context) => {
-          const { folders, notes } = context;
-          const { folderId } = this.props.match.params;
-          const folder = folders.find((folder) => folder.id === folderId);
-          const notesInsideFolder = notes.filter(
-            (note) => note.folderId === folder.id
-          );
-          return notesInsideFolder.map((note) => (
+        {(context) =>
+          context.notes.map((note) => (
             <li className="note-card" key={note.id}>
               <Link to={`/note/${note.id}`}>
                 {note.name} <br />
@@ -22,16 +16,17 @@ export default class MainFolder extends Component {
                 {new Date(note.modified).getFullYear()}
               </Link>
             </li>
-          ));
-        }}
+          ))
+        }
       </NotesContext.Consumer>
     );
   };
   render() {
     return (
       <div>
-        <h3>NOTES:</h3>
-        <ul className="notes-list">{this.renderFolderContents()}</ul>
+        <h2>Notes</h2>
+        <ul className="notes-list">{this.renderNotesList()}</ul>
+        <button className="btn">Add Note</button>
       </div>
     );
   }
