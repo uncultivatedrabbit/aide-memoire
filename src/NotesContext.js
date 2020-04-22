@@ -4,5 +4,6 @@ export const NotesContext = React.createContext({
   folders: [],
   notes: [],
   deleteNote: () => {},
-  router: {}
+  addFolder: () => {},
+  addNote: () => {},
 });

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { NotesContext } from "../../NotesContext";
+import { NotesContext } from "../../../NotesContext";
+import BackButton from "../buttons/BackButton";
 
 export default class NoteSidebar extends Component {
   renderNoteSidebar = () => {
@@ -22,6 +23,14 @@ export default class NoteSidebar extends Component {
     );
   };
   render() {
-    return <div className="folder-name-vert">{this.renderNoteSidebar()}</div>;
+    return (
+      <>
+        <div className="sidebar-header-container">
+          <BackButton />
+          <h2>Folder</h2>
+        </div>
+        <div className="folder-name-vert">{this.renderNoteSidebar()}</div>
+      </>
+    );
   }
 }

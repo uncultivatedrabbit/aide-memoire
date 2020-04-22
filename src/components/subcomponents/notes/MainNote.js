@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NotesContext } from "../../NotesContext";
+import { NotesContext } from "../../../NotesContext";
 
 export default class MainNote extends Component {
   static contextType = NotesContext;
@@ -15,7 +15,7 @@ export default class MainNote extends Component {
     fetch(deletedNoteUrl, header)
       .then(async (res) => {
         if (res.ok) {
-          window.location = "http://localhost:3000/"
+          window.location = "http://localhost:3000/";
           return res.json();
         } else {
           const e = await res.json();
@@ -37,7 +37,11 @@ export default class MainNote extends Component {
           const note = notes.find((note) => note.id === noteId) || {};
           return (
             <>
-              <h2>{note.name}</h2>
+              <h2>
+                {note.name
+                  ? note.name.charAt(0).toUpperCase() + note.name.slice(1)
+                  : ""}
+              </h2>
               {new Date(note.modified).getMonth() + 1}/
               {new Date(note.modified).getDate()}/
               {new Date(note.modified).getFullYear()}

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { NotesContext } from "../../NotesContext";
+import { NotesContext } from "../../../NotesContext";
 
 export default class MainFolder extends Component {
   renderFolderContents = () => {
@@ -9,7 +9,7 @@ export default class MainFolder extends Component {
         {(context) => {
           const { folders, notes } = context;
           const { folderId } = this.props.match.params;
-          const folder = folders.find((folder) => folder.id === folderId);
+          const folder = folders.find((folder) => folder.id === folderId) || {};
           const notesInsideFolder = notes.filter(
             (note) => note.folderId === folder.id
           );
@@ -30,7 +30,7 @@ export default class MainFolder extends Component {
   render() {
     return (
       <div>
-        <h3>NOTES:</h3>
+        <h2>Notes</h2>
         <ul className="notes-list">{this.renderFolderContents()}</ul>
       </div>
     );

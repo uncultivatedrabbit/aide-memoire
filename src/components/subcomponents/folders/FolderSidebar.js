@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import { NotesContext } from "../../NotesContext";
+import { NotesContext } from "../../../NotesContext";
+import BackButton from "../buttons/BackButton";
 
 export default class FolderSidebar extends Component {
   renderFolderSidebar = () => {
@@ -15,7 +16,7 @@ export default class FolderSidebar extends Component {
           ));
           return (
             <>
-              <ul>{folderList}</ul>
+              <ul className="folder-list">{folderList}</ul>
             </>
           );
         }}
@@ -23,6 +24,14 @@ export default class FolderSidebar extends Component {
     );
   };
   render() {
-    return <div>{this.renderFolderSidebar()}</div>;
+    return (
+      <>
+        <div className="sidebar-header-container">
+          <BackButton />
+          <h2>Folders</h2>
+        </div>
+        {this.renderFolderSidebar()}
+      </>
+    );
   }
 }

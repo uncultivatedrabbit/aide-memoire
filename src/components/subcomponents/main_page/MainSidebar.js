@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { NotesContext } from "../../NotesContext";
+import { NotesContext } from "../../../NotesContext";
+import AddFolderButton from '../buttons/AddFolderButton'
+
 
 export default class MainSidebar extends Component {
   renderFolders = () => {
@@ -19,8 +21,9 @@ export default class MainSidebar extends Component {
   render() {
     return (
       <div>
+        <h2>Folders</h2>
         <ul>{this.renderFolders()}</ul>
-        <button className="btn">Add Folder</button>
+        <AddFolderButton/>
       </div>
     );
   }

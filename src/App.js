@@ -9,8 +9,8 @@ class App extends Component {
   state = {
     folders: [],
     notes: [],
-
   };
+
   componentDidMount() {
     const folderUrl = "http://localhost:9090/folders";
     const notesUrl = "http://localhost:9090/notes";
@@ -33,13 +33,25 @@ class App extends Component {
   }
 
   handleDeleteNote = (noteId) => {
-  
     this.setState({
       ...this.state,
       notes: this.state.notes.filter((note) => note.id !== noteId),
     });
   };
 
+  handleAddFolder = (folder) => {
+    this.setState({
+      ...this.state,
+      folders: [...this.state.folders, folder],
+    });
+  };
+
+  handleAddNote = (note) => {
+    this.setState({
+      ...this.state,
+      notes: [...this.state.notes, note],
+    });
+  };
 
   render() {
     const { folders, notes } = this.state;
@@ -47,6 +59,8 @@ class App extends Component {
       folders,
       notes,
       deleteNote: this.handleDeleteNote,
+      addFolder: this.handleAddFolder,
+      addNote: this.handleAddNote,
     };
     return (
       <NotesContext.Provider value={value}>
