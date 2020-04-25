@@ -9,6 +9,7 @@ class App extends Component {
   state = {
     folders: [],
     notes: [],
+    errorMessage: "",
   };
 
   componentDidMount() {
@@ -29,7 +30,11 @@ class App extends Component {
       .then(([folders, notes]) => {
         this.setState({ folders, notes });
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>
+        this.setState({
+          errorMessage: "Sorry. Something went wrong with the connection.",
+        })
+      );
   }
 
   handleDeleteNote = (noteId) => {
@@ -70,14 +75,22 @@ class App extends Component {
               <h1 id="title">Noteful</h1>
             </Link>
           </header>
-          <div id="container">
-            <section id="sidebar-container">
-              <Sidebar />
-            </section>
-            <main id="main-container">
-              <Main />
-            </main>
-          </div>
+          {this.state.errorMessage ? (
+            <>
+              <h1 className="error-msg front-page-error">{this.state.errorMessage}</h1>
+            </>
+          ) : (
+            <>
+              <div id="container">
+                <section id="sidebar-container">
+                  <Sidebar />
+                </section>
+                <main id="main-container">
+                  <Main />
+                </main>
+              </div>
+            </>
+          )}
         </>
       </NotesContext.Provider>
     );

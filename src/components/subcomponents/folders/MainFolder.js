@@ -16,7 +16,10 @@ export default class MainFolder extends Component {
           return notesInsideFolder.map((note) => (
             <li className="note-card" key={note.id}>
               <Link to={`/note/${note.id}`}>
-                {note.name} <br />
+                {note.name
+                  ? note.name.charAt(0).toUpperCase() + note.name.slice(1)
+                  : ""}{" "}
+                <br />
                 {new Date(note.modified).getMonth() + 1}/
                 {new Date(note.modified).getDate()}/
                 {new Date(note.modified).getFullYear()}

@@ -100,6 +100,7 @@ export default class AddNote extends Component {
         return res.json();
       })
       .then((data) => {
+        this.props.history.goBack();
         this.context.addNote(data);
       })
       .catch((err) => console.log(err));
@@ -115,7 +116,9 @@ export default class AddNote extends Component {
                 value={folder.name}
                 className="folder-option"
                 key={folder.id}>
-                {folder.name}
+                {folder.name
+                  ? folder.name.charAt(0).toUpperCase() + folder.name.slice(1)
+                  : ""}
               </option>
             );
           })
@@ -125,7 +128,7 @@ export default class AddNote extends Component {
   };
   render() {
     return (
-      <div>
+      <div className="add-form-container">
         <h2>Create Note:</h2>
         <form
           id="note-form"
@@ -137,6 +140,7 @@ export default class AddNote extends Component {
             id="add-note-name"
             name="noteName"
             type="text"
+            aria-required="true" 
           />
           {this.state.nameErrorMessage && (
             <p className="error-msg">{this.state.nameErrorMessage}</p>
@@ -147,6 +151,7 @@ export default class AddNote extends Component {
             className="form-textarea"
             name="noteContent"
             id="add-note-content"
+            aria-required="true" 
           />
           {this.state.contentErrorMessage && (
             <p className="error-msg">{this.state.contentErrorMessage}</p>
@@ -154,10 +159,11 @@ export default class AddNote extends Component {
           <label className="select-folder-label" htmlFor="select-folder">
             Folder
           </label>
-          <select name="selectedFolder" id="select-folder">
+          <select name="selectedFolder" id="select-folder"  aria-required="true" >
             {this.renderOptions()}
           </select>
           <button
+          tabIndex="1"
             disabled={
               !this.state.note.contentTouched || !this.state.note.nameTouched
             }

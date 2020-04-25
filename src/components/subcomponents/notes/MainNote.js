@@ -15,7 +15,6 @@ export default class MainNote extends Component {
     fetch(deletedNoteUrl, header)
       .then(async (res) => {
         if (res.ok) {
-          window.location = "http://localhost:3000/";
           return res.json();
         } else {
           const e = await res.json();
@@ -23,6 +22,7 @@ export default class MainNote extends Component {
         }
       })
       .then(() => {
+        this.props.history.goBack();
         this.context.deleteNote(noteId);
       })
       .catch((err) => console.log(err));
@@ -49,7 +49,7 @@ export default class MainNote extends Component {
               <p className="note-detail">{note.content}</p>
               <button
                 onClick={this.handleClickDelete}
-                className={`btn ${note.name}-btn`}>
+                className={`btn note-btn`}>
                 Delete Note
               </button>
             </>

@@ -18,10 +18,10 @@ export default class AddFolder extends Component {
         errorMessage: "Folder name can't be empty.",
       });
     }
-    if(value.length === 10){
+    if (value.length === 10) {
       this.setState({
-        errorMessage: "10 characters is max length."
-      })
+        errorMessage: "10 characters is max length.",
+      });
     }
   }
 
@@ -61,6 +61,7 @@ export default class AddFolder extends Component {
         return res.json();
       })
       .then((data) => {
+        this.props.history.goBack();
         this.context.addFolder(data);
       })
       .catch((err) => console.log(err));
@@ -68,7 +69,7 @@ export default class AddFolder extends Component {
 
   render() {
     return (
-      <div>
+      <div className="add-form-container">
         <h2>Create Folder</h2>
         <form
           id="folder-form"
@@ -81,11 +82,13 @@ export default class AddFolder extends Component {
             name="folderName"
             type="text"
             maxLength="10"
+            aria-required="true"
           />
           {this.state.errorMessage && (
             <p className="error-msg">{this.state.errorMessage}</p>
           )}
           <button
+            tabIndex="1"
             disabled={!this.state.touched}
             className="btn form-btn"
             type="submit">
