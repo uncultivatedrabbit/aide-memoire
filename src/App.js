@@ -13,8 +13,11 @@ class App extends Component {
   };
 
   componentDidMount() {
+    // locations of inital data 
     const folderUrl = "http://localhost:9090/folders";
     const notesUrl = "http://localhost:9090/notes";
+
+    // fetch the folders and notes from the DB and verify the process was successful
     Promise.all([fetch(folderUrl), fetch(notesUrl)])
       .then(async ([folderRes, notesRes]) => {
         if (!folderRes.ok) {
@@ -28,6 +31,8 @@ class App extends Component {
         return Promise.all([folderRes.json(), notesRes.json()]);
       })
       .then(([folders, notes]) => {
+        // update state with the folders and notes
+        // from the database
         this.setState({ folders, notes });
       })
       .catch((err) =>
@@ -37,6 +42,7 @@ class App extends Component {
       );
   }
 
+  // handle when the user deletes a specific note
   handleDeleteNote = (noteId) => {
     this.setState({
       ...this.state,
@@ -44,6 +50,7 @@ class App extends Component {
     });
   };
 
+  // handle when the user adds a new folder 
   handleAddFolder = (folder) => {
     this.setState({
       ...this.state,
@@ -51,6 +58,7 @@ class App extends Component {
     });
   };
 
+  // handle when the user adds a new note
   handleAddNote = (note) => {
     this.setState({
       ...this.state,
@@ -60,6 +68,7 @@ class App extends Component {
 
   render() {
     const { folders, notes } = this.state;
+    // Prepare context value to be passed into the context provider
     const value = {
       folders,
       notes,
@@ -72,12 +81,18 @@ class App extends Component {
         <>
           <header id="header">
             <Link to="/">
-              <h1 id="title">Noteful</h1>
+              <h1 id="title">Aide-Memoire</h1>
             </Link>
+            <p className="subheader">
+              Track and organize your notes, saving them in different folders to
+              help structure your ideas, projects, and interests.
+            </p>
           </header>
           {this.state.errorMessage ? (
             <>
-              <h1 className="error-msg front-page-error">{this.state.errorMessage}</h1>
+              <h1 className="error-msg front-page-error">
+                {this.state.errorMessage}
+              </h1>
             </>
           ) : (
             <>

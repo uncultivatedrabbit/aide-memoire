@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { NotesContext } from "../../../NotesContext";
 
+// component renders the main UI of the list of notes inside the folder the user has clicked on
 export default class MainFolder extends Component {
+
+  // handles rendering the specific list of notes inside each folder
+  // and appends them to a link that allows the user to click into each
+  // specific note
   renderFolderContents = () => {
     return (
       <NotesContext.Consumer>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+// error message rendered if something goes wrong
 export default class ErrorMessage extends Component {
   state = {
     error: null,
@@ -11,7 +12,6 @@ export default class ErrorMessage extends Component {
     return { error };
   }
 
-  handleCountDown() {}
   componentDidMount() {
     this.interval = setInterval(() => {
       if (this.state.count > 0) {
@@ -30,13 +30,14 @@ export default class ErrorMessage extends Component {
         <main className="error-message">
           <h1>Something went wrong.</h1>
           {this.state.count > 0 ? (
-            <p>OH NO! YOU'RE COMPUTER WILL SELF-DESTRUCT IN {this.state.count} </p>
+            <p>OH NO! THIS APP WILL SELF-DESTRUCT IN {this.state.count} </p>
           ) : (
-            <p>Just kidding lol, you just try refreshing the browser.</p>
+            <p>Just kidding, you just try refreshing the browser.</p>
           )}
         </main>
       );
     }
+    // if no error the app renders normally
     return this.props.children;
   }
 }

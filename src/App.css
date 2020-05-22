@@ -119,6 +119,12 @@ button:disabled:hover {
   font-size: 32px;
 }
 
+.subheader{
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 /* ------------------
   Button Styling 
 -------------------*/
@@ -394,7 +400,7 @@ button:disabled:hover {
     text-align: center;
   }
   #sidebar-container{
-    min-height: 700px;
+    min-height: 800px;
   }
   .folder-name-vert * {
     writing-mode: horizontal-tb;

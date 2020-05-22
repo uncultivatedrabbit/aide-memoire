@@ -3,9 +3,16 @@ import { Link } from "react-router-dom";
 import { NotesContext } from "../../../NotesContext";
 import AddNoteButton from "../buttons/AddNoteButton";
 
+
+// component for the MAIN notes list found when user goes to '/' endpoint
 export default class MainNotesList extends Component {
+
+  // function to propogate the list of notes from the DB and append them
+  // to the list, making each a link with the individual ID of the note
   renderNotesList = () => {
     return (
+      // Context consumer allows context data from app.js to be passed as props without
+      // prop drilling
       <NotesContext.Consumer>
         {(context) =>
           context.notes.map((note) => (
@@ -22,6 +29,7 @@ export default class MainNotesList extends Component {
       </NotesContext.Consumer>
     );
   };
+
   render() {
     return (
       <div>

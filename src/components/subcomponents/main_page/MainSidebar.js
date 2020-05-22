@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { NotesContext } from "../../../NotesContext";
 import AddFolderButton from '../buttons/AddFolderButton'
 
-
+// component that renders the folders on the sidebar when user goes to '/' endpoint
 export default class MainSidebar extends Component {
+  // handles propogating folders from DB and appending them to the list 
+  // and making each a link using the custom folder id
   renderFolders = () => {
     return (
       <NotesContext.Consumer>

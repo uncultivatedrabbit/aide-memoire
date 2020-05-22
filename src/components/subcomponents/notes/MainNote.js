@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { NotesContext } from "../../../NotesContext";
 
+// renders NOTE component inside the MAIN component when user clicks into a specific note
 export default class MainNote extends Component {
   static contextType = NotesContext;
 
+  // handles when user deletes the specific note
   handleClickDelete = (e) => {
     e.preventDefault();
     const { noteId } = this.props.match.params;
@@ -28,6 +30,7 @@ export default class MainNote extends Component {
       .catch((err) => console.log(err));
   };
 
+  // handles rendering the UI of the specific note
   renderNote = () => {
     return (
       <NotesContext.Consumer>

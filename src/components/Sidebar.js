@@ -9,6 +9,7 @@ import AddNote from "./subcomponents/add-forms/AddNote";
 export default function Sidebar() {
   return (
     <>
+      {/* switch statement that handles different endpoints the user can go to, matching with the main component*/}
       <Switch>
         <Route exact path="/" component={MainSidebar} />
         <Route path="/add-folder" component={AddFolder} />

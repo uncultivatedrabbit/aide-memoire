@@ -1,5 +1,6 @@
 import React from "react";
 
+// component rendered if user tries to go to an endpoint that doesn't exist
 export default function FourOhFour() {
   return (
     <main className="four-oh-four-page">

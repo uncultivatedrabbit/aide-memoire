@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { NotesContext } from "../../../NotesContext";
 
+// component handles user adding a note to notes list in DB
 export default class AddNote extends Component {
   state = {
     note: {
@@ -14,6 +15,9 @@ export default class AddNote extends Component {
   };
   static contextType = NotesContext;
 
+  // handles verification of note name
+  // and ensures user doesn't try to submit
+  // an empty note name
   handleNameValidation(input) {
     if (input.length < 1) {
       this.setState({
@@ -26,6 +30,9 @@ export default class AddNote extends Component {
     }
   }
 
+  // handles verification of note content
+  // and ensures user doesn't try to submit
+  // empty note content
   handleContentValidation(input) {
     if (input.length < 1) {
       this.setState({
@@ -38,6 +45,7 @@ export default class AddNote extends Component {
     }
   }
 
+  // listens for user name input and updates state 
   handleNameChange(e) {
     const newNoteName = e.target.value;
     this.setState(
@@ -49,10 +57,12 @@ export default class AddNote extends Component {
         },
         nameErrorMessage: "",
       },
+      // passes user name input into validation method
       () => this.handleNameValidation(newNoteName)
     );
   }
 
+  // listens for user content input and updates state
   handleContentChange(e) {
     const newNoteContent = e.target.value;
     this.setState(
@@ -64,18 +74,21 @@ export default class AddNote extends Component {
         },
         contentErrorMessage: "",
       },
+      // passes user input into content validation method
       () => this.handleContentValidation(newNoteContent)
     );
   }
 
+  // handles form submission
   handleAddNoteSubmit(e) {
+    // prevents page from reloading
     e.preventDefault();
     const dateStamp = new Date();
     const newNoteFolder = e.target.selectedFolder.value;
     const selectedFolderId = this.context.folders.filter(
       (folder) => folder.name === newNoteFolder
     )[0].id;
-
+    // creates note object with data from state
     const note = {
       name: this.state.note.name,
       content: this.state.note.content,
@@ -84,6 +97,7 @@ export default class AddNote extends Component {
     };
 
     const url = "http://localhost:9090/notes";
+    // configures POST request
     const headers = {
       method: "POST",
       body: JSON.stringify(note),
@@ -105,7 +119,8 @@ export default class AddNote extends Component {
       })
       .catch((err) => console.log(err));
   }
-
+  // renders the folder options 
+  // so the user can save note inside existing folder
   renderOptions = () => {
     return (
       <NotesContext.Consumer>
@@ -140,7 +155,7 @@ export default class AddNote extends Component {
             id="add-note-name"
             name="noteName"
             type="text"
-            aria-required="true" 
+            aria-required="true"
           />
           {this.state.nameErrorMessage && (
             <p className="error-msg">{this.state.nameErrorMessage}</p>
@@ -151,7 +166,7 @@ export default class AddNote extends Component {
             className="form-textarea"
             name="noteContent"
             id="add-note-content"
-            aria-required="true" 
+            aria-required="true"
           />
           {this.state.contentErrorMessage && (
             <p className="error-msg">{this.state.contentErrorMessage}</p>
@@ -159,11 +174,12 @@ export default class AddNote extends Component {
           <label className="select-folder-label" htmlFor="select-folder">
             Folder
           </label>
-          <select name="selectedFolder" id="select-folder"  aria-required="true" >
+          <select name="selectedFolder" id="select-folder" aria-required="true">
             {this.renderOptions()}
           </select>
           <button
-          tabIndex="1"
+            tabIndex="1"
+            // disables the submit button if the user hasn't inputted anything in the name or content
             disabled={
               !this.state.note.contentTouched || !this.state.note.nameTouched
             }

@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { NotesContext } from "../../../NotesContext";
 import BackButton from "../buttons/BackButton";
 
+
+// renders sidebar of specific note when user clicks into it
 export default class NoteSidebar extends Component {
+  // renders the sidebar UI, which contains the name of the folder the specific note is inside of in the DB
   renderNoteSidebar = () => {
     return (
       <NotesContext.Consumer>
