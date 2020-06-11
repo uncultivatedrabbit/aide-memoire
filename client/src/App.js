@@ -4,6 +4,7 @@ import "./App.css";
 import Main from "./components/Main";
 import Sidebar from "./components/Sidebar";
 import { NotesContext } from "./NotesContext";
+import { API_ENDPOINT } from "./config";
 
 class App extends Component {
   state = {
@@ -13,9 +14,9 @@ class App extends Component {
   };
 
   componentDidMount() {
-    // locations of inital data 
-    const folderUrl = "http://localhost:9090/folders";
-    const notesUrl = "http://localhost:9090/notes";
+    // locations of inital data
+    const folderUrl = `${API_ENDPOINT}/api/folders`;
+    const notesUrl = `${API_ENDPOINT}/api/notes`;
 
     // fetch the folders and notes from the DB and verify the process was successful
     Promise.all([fetch(folderUrl), fetch(notesUrl)])
@@ -46,11 +47,11 @@ class App extends Component {
   handleDeleteNote = (noteId) => {
     this.setState({
       ...this.state,
-      notes: this.state.notes.filter((note) => note.id !== noteId),
+      notes: this.state.notes.filter((note) => note.id !== +noteId),
     });
   };
 
-  // handle when the user adds a new folder 
+  // handle when the user adds a new folder
   handleAddFolder = (folder) => {
     this.setState({
       ...this.state,

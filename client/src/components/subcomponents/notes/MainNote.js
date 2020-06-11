@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { NotesContext } from "../../../NotesContext";
+import { API_ENDPOINT } from "../../../config";
 
 // renders NOTE component inside the MAIN component when user clicks into a specific note
 export default class MainNote extends Component {
@@ -9,7 +10,7 @@ export default class MainNote extends Component {
   handleClickDelete = (e) => {
     e.preventDefault();
     const { noteId } = this.props.match.params;
-    const deletedNoteUrl = `http://localhost:9090/notes/${noteId}`;
+    const deletedNoteUrl = `${API_ENDPOINT}/api/notes/${noteId}`;
     const header = {
       method: "DELETE",
       headers: { "content-type": "application/json" },
@@ -17,7 +18,7 @@ export default class MainNote extends Component {
     fetch(deletedNoteUrl, header)
       .then(async (res) => {
         if (res.ok) {
-          return res.json();
+          return res.text();
         } else {
           const e = await res.json();
           return await Promise.reject(e);
@@ -37,19 +38,19 @@ export default class MainNote extends Component {
         {(context) => {
           const { notes } = context;
           const { noteId } = this.props.match.params;
-          const note = notes.find((note) => note.id === noteId) || {};
+          const note = notes.find((note) => note.id === +(noteId)) || {};
           return (
             <>
               <h2>
-                {note.name
-                  ? note.name.charAt(0).toUpperCase() + note.name.slice(1)
+                {note.note_name
+                  ? note.note_name.charAt(0).toUpperCase() + note.note_name.slice(1)
                   : ""}
               </h2>
-              {new Date(note.modified).getMonth() + 1}/
-              {new Date(note.modified).getDate()}/
-              {new Date(note.modified).getFullYear()}
+              {new Date(note.date_modified).getMonth() + 1}/
+              {new Date(note.date_modified).getDate()}/
+              {new Date(note.date_modified).getFullYear()}
               <br />
-              <p className="note-detail">{note.content}</p>
+              <p className="note-detail">{note.note_content}</p>
               <button
                 onClick={this.handleClickDelete}
                 className={`btn note-btn`}>

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { NotesContext } from "../../../NotesContext";
+import { API_ENDPOINT } from "../../../config";
+import BackButton from "../buttons/BackButton";
 
 // component handles user adding a note to notes list in DB
 export default class AddNote extends Component {
@@ -45,7 +47,7 @@ export default class AddNote extends Component {
     }
   }
 
-  // listens for user name input and updates state 
+  // listens for user name input and updates state
   handleNameChange(e) {
     const newNoteName = e.target.value;
     this.setState(
@@ -86,17 +88,17 @@ export default class AddNote extends Component {
     const dateStamp = new Date();
     const newNoteFolder = e.target.selectedFolder.value;
     const selectedFolderId = this.context.folders.filter(
-      (folder) => folder.name === newNoteFolder
+      (folder) => folder.folder_name === newNoteFolder
     )[0].id;
     // creates note object with data from state
     const note = {
-      name: this.state.note.name,
-      content: this.state.note.content,
-      folderId: selectedFolderId,
-      modified: dateStamp,
+      note_name: this.state.note.name,
+      note_content: this.state.note.content,
+      folder_id: selectedFolderId,
+      note_modified: dateStamp,
     };
 
-    const url = "http://localhost:9090/notes";
+    const url = `${API_ENDPOINT}/api/notes`;
     // configures POST request
     const headers = {
       method: "POST",
@@ -119,7 +121,7 @@ export default class AddNote extends Component {
       })
       .catch((err) => console.log(err));
   }
-  // renders the folder options 
+  // renders the folder options
   // so the user can save note inside existing folder
   renderOptions = () => {
     return (
@@ -131,8 +133,9 @@ export default class AddNote extends Component {
                 value={folder.name}
                 className="folder-option"
                 key={folder.id}>
-                {folder.name
-                  ? folder.name.charAt(0).toUpperCase() + folder.name.slice(1)
+                {folder.folder_name
+                  ? folder.folder_name.charAt(0).toUpperCase() +
+                    folder.folder_name.slice(1)
                   : ""}
               </option>
             );
@@ -144,7 +147,10 @@ export default class AddNote extends Component {
   render() {
     return (
       <div className="add-form-container">
-        <h2>Create Note:</h2>
+        <div className="add-form-header">
+          <BackButton />
+          <h2>Create Note:</h2>
+        </div>
         <form
           id="note-form"
           className="add-form"

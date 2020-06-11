@@ -13,7 +13,7 @@ export default class MainSidebar extends Component {
         {(context) =>
           context.folders.map((folder) => (
             <li className="folder-card" key={folder.id}>
-              <Link to={`/folder/${folder.id}`}>{folder.name}</Link>
+              <Link to={`/folder/${folder.id}`}>{folder.folder_name}</Link>
             </li>
           ))
         }
@@ -23,8 +23,9 @@ export default class MainSidebar extends Component {
   render() {
     return (
       <div>
+        
         <h2>Folders</h2>
-        <ul>{this.renderFolders()}</ul>
+        <ul className="folder-list">{this.renderFolders()}</ul>
         <AddFolderButton/>
       </div>
     );

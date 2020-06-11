@@ -18,10 +18,10 @@ export default class MainNotesList extends Component {
           context.notes.map((note) => (
             <li className="note-card" key={note.id}>
               <Link to={`/note/${note.id}`}>
-                {note.name.charAt(0).toUpperCase() + note.name.slice(1)} <br />
-                {new Date(note.modified).getMonth() + 1}/
-                {new Date(note.modified).getDate()}/
-                {new Date(note.modified).getFullYear()}
+                {note.note_name.charAt(0).toUpperCase() + note.note_name.slice(1)} <br />
+                {new Date(note.date_modified).getMonth() + 1}/
+                {new Date(note.date_modified).getDate()}/
+                {new Date(note.date_modified).getFullYear()}
               </Link>
             </li>
           ))

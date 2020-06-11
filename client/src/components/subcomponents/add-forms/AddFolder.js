@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { NotesContext } from "../../../NotesContext";
+import { API_ENDPOINT } from "../../../config";
+import BackButton from "../buttons/BackButton";
 
-// component handles user adding new folders 
+// component handles user adding new folders
 export default class AddFolder extends Component {
   static contextType = NotesContext;
   state = {
@@ -12,7 +14,7 @@ export default class AddFolder extends Component {
     errorMessage: "",
   };
 
-  // handles validation of folder name 
+  // handles validation of folder name
   validateNameInput(value) {
     // checks if user has inputted any chars
     // and blocks user from submitting a nameless folder
@@ -22,7 +24,7 @@ export default class AddFolder extends Component {
         errorMessage: "Folder name can't be empty.",
       });
     }
-    // checks if folder name is 10 chars long 
+    // checks if folder name is 10 chars long
     // to maintain usable UI
     if (value.length === 10) {
       this.setState({
@@ -53,9 +55,9 @@ export default class AddFolder extends Component {
     // ensures page doesn't reload
     e.preventDefault();
     const folder = {
-      name: this.state.folder.name,
+      folder_name: this.state.folder.name,
     };
-    const url = "http://localhost:9090/folders";
+    const url = `${API_ENDPOINT}/api/folders`;
     // configures POST request
     const headers = {
       method: "POST",
@@ -82,7 +84,10 @@ export default class AddFolder extends Component {
   render() {
     return (
       <div className="add-form-container">
-        <h2>Create Folder</h2>
+        <div className="add-form-header">
+          <BackButton />
+          <h2>Create Folder</h2>
+        </div>
         <form
           id="folder-form"
           className="add-form"

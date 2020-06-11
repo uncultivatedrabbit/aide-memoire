@@ -12,10 +12,10 @@ export default class FolderSidebar extends Component {
       <NotesContext.Consumer>
         {(context) => {
           const { folders } = context;
-          const folderList = folders.map((folder) => (
+          const folderList = folders.map((folder) => (   
             <li className="folder-card" key={folder.id}>
               {/* use NavLink instead of Link to take advantage of the 'active' property */}
-              <NavLink to={folder.id}>{folder.name}</NavLink>
+              <NavLink to={String(folder.id)}>{folder.folder_name}</NavLink>
             </li>
           ));
           return (
